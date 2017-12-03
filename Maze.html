@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Maze</title>
+    <script type="text/javascript">
+        var maze = [
+            [1,1,0,0,0],
+            [0,1,0,0,0],
+            [0,1,0,0,0],
+            [0,1,1,1,0],
+            [0,0,0,2,0]
+        ];
+        var x = 0;
+        var y = 0;
+        mazePrint(maze);
+
+        document.write("<br></br>");
+
+        var result = mazeSolve(x, y);
+        if(result == true){
+            document.write("Maze solved");
+        }
+
+        function mazeSolve(column ,row) {
+                if(maze[column][row] == 2) {
+                    console.log("We solved the maze at (" + column + ", " + row + ")");
+                }
+                else if(maze[column][row] == 1) {
+                    console.log("At valid position (" + column + ", " + row + ")");
+                    maze[column][row] = 9;
+
+                    //check above
+                    if(column < maze.length - 1) {
+                        mazeSolve(column + 1, row);
+                    }
+                    //check right
+                    if(row < maze.length - 1) {
+                        mazeSolve(column, row + 1);
+                    }
+                    //check below
+                    if(column > 0) {
+                        mazeSolve(column - 1, row);
+                    }
+                    //check left
+                    if(row > 0) {
+                        mazeSolve(column, row - 1);
+                    }
+                }
+                else
+                {
+                    //console.log("Not a valid position (" + column + ", " + row + ")");
+                }
+            }
+
+
+
+        function mazePrint(){
+            for(var i=0; i<5; i++){
+                for(var x=0; x<5; x++){
+                    document.write(maze[i][x]);
+                }
+                document.write("<br></br>");
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
